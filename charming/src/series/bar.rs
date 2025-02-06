@@ -55,6 +55,9 @@ pub struct Bar {
     label: Option<Label>,
 
     #[serde(skip_serializing_if = "Option::is_none")]
+    dataset_id: Option<String>,
+    
+    #[serde(skip_serializing_if = "Option::is_none")]
     item_style: Option<ItemStyle>,
 
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -99,6 +102,7 @@ impl Bar {
             show_background: None,
             background_style: None,
             label: None,
+            dataset_id: None,
             item_style: None,
             emphais: None,
             mark_line: None,
@@ -173,7 +177,12 @@ impl Bar {
         self.label = Some(label.into());
         self
     }
-
+    
+    pub fn dataset_id<S: Into<String>>(mut self, dataset_id: S) -> Self {
+        self.dataset_id = Some(dataset_id.into());
+        self
+    }
+    
     pub fn item_style<S: Into<ItemStyle>>(mut self, item_style: S) -> Self {
         self.item_style = Some(item_style.into());
         self
